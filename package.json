@@ -1,0 +1,28 @@
+{
+  "name": "walrus-memory-palace",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A sample app for the Walrus Memory SDK — inspect your memories as a first-person crystal palace.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mysten-incubation/memwal": "^0.1.2",
+    "@mysten/sui": "^2.6.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}
