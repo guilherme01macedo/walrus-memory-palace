@@ -73,7 +73,11 @@ transaction (no gas), and hands the palace tab the result over a same-origin
 `BroadcastChannel`. It needs the dashboard's `/connect/app` route, which is not
 on production yet — so use manual setup for now.
 
-## Regenerating the artwork
+## Optional: regenerate the artwork
+
+**You don't need this to run the app** — every runtime asset already ships in
+`public/palace/` and loads on `pnpm dev`. This section is only for redrawing the
+palace.
 
 The rooms are AI-generated (Higgsfield). `gen-src/` holds the reproducible
 pipeline: `gen-scenes.sh` (prompts) → `gen-rest.sh` (style-locked interiors) →
