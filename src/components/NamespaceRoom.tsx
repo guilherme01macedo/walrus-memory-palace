@@ -4,7 +4,7 @@
  * room console shows the shard's text (once the room is decrypted), its
  * metadata, and its on-chain links.
  */
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { MemoryBlob, SuiNetwork } from "../types";
 import { formatBytes, short, suiObjectUrl, walruscanBlobUrl } from "../lib/format";
 import { variantFor } from "../palace/scenes";
@@ -93,7 +93,6 @@ export function NamespaceConsole({
     );
     const sealedCount = blobs.filter((b) => b.text === undefined).length;
     const overflow = blobs.length - Math.min(blobs.length, MAX_ON_SHELF);
-    const [showSnippet, setShowSnippet] = useState(false);
 
     return (
         <section>
@@ -122,20 +121,15 @@ export function NamespaceConsole({
                         inspect it. Sealed shards need the room decrypted first.
                         {overflow > 0 && ` (${overflow} more not shown — the shelf holds ${MAX_ON_SHELF}.)`}
                     </p>
-                    <button className="hint" style={{ background: "none", border: 0, cursor: "pointer", padding: 0 }} onClick={() => setShowSnippet((s) => !s)}>
-                        {showSnippet ? "▾" : "▸"} Show the SDK call
-                    </button>
-                    {showSnippet && (
-                        <Snippet
-                            code={`// this room = the on-chain blobs whose metadata says
+                    <Snippet
+                        code={`// this room = the on-chain blobs whose metadata says
 //   memwal_namespace == "${namespace}"
 // decrypting it:
 const res = await memwal.recall({
   query: "everything that is known", limit: 100, namespace: "${namespace}",
 })
 // join res.results onto the shelf by blob_id`}
-                        />
-                    )}
+                    />
                 </>
             )}
         </section>
