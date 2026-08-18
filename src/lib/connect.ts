@@ -1,6 +1,17 @@
 /**
  * One-click connect via the Walrus Memory dashboard.
  *
+ * PARKED — NOT DEAD CODE. `beginDashboardConnect` currently has no caller: the
+ * Gates only offer manual credential entry, because no deployed dashboard hosts
+ * the `/connect/app` route this flow depends on. Both memory.walrus.xyz and
+ * dev.memwal.ai answer that path with the SPA's index.html, and their router
+ * then falls back to `/` — dropping publicKey, connectState, and redirect — so
+ * the user lands on a bare sign-in page with no way to approve anything.
+ * Everything below is written and working; restore the button in SettingsForm
+ * once the route ships. The rest of this module IS live: main.tsx uses
+ * isConnectReturn/finishConnectReturn, App.tsx uses consumeDashboardCallback
+ * and onConnected.
+ *
  * The SDK authenticates with an Ed25519 delegate key that must be registered
  * on the user's MemWalAccount (`add_delegate_key`). zkLogin, the wallet
  * signature, and the *sponsored* registration transaction can only run on the

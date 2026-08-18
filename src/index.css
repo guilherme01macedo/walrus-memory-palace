@@ -353,6 +353,42 @@ button:disabled {
     color: var(--muted);
 }
 
+/* The three steps that produce the two credentials above the form. Numbers are
+   drawn from a counter so they stay aligned with the wrapped text beside them. */
+.settings-steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.settings-steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.settings-steps li::before {
+    content: counter(step);
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 22px;
+    text-align: center;
+    color: var(--accent);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+}
+
 .settings-row {
     display: grid;
     grid-template-columns: 1fr 1fr;

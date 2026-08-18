@@ -57,21 +57,25 @@ calls. See `.env.example` for the optional overrides.
 
 ## Connect your account — use mainnet
 
-Open **"Manual setup & advanced options"** at the Gates and paste:
+The Gates ask for two credentials — the same values `MemWal.create()` takes:
 
 - a delegate private key, and
 - your `MemWalAccount` object ID
 
-These are the same two values `MemWal.create()` takes. **Set the network to
-mainnet.** Get them from the Walrus Memory dashboard
-(https://memory.walrus.xyz), or reuse the ones your MCP login saved in
-`~/.memwal/credentials.json`. The key stays in your browser's `localStorage`.
+Get them from the Walrus Memory dashboard (https://memory.walrus.xyz), or reuse
+the ones your MCP login saved in `~/.memwal/credentials.json`. The network
+defaults to **mainnet**, which is what you want; it lives under "Advanced
+options" alongside the relayer URL and endpoints. The key stays in your
+browser's `localStorage`.
 
-One-click connect through the dashboard also exists: a delegate key is generated
-in your browser, the dashboard registers it with a sponsored `add_delegate_key`
-transaction (no gas), and hands the palace tab the result over a same-origin
-`BroadcastChannel`. It needs the dashboard's `/connect/app` route, which is not
-on production yet — so use manual setup for now.
+A one-click handoff is implemented but **not reachable from the UI**. It
+generates a delegate key in your browser, has the dashboard register it with a
+sponsored `add_delegate_key` transaction (no gas), and returns the result to the
+palace tab over a same-origin `BroadcastChannel`. It needs the dashboard's
+`/connect/app` route, which no deployment serves yet — requests there fall back
+to the sign-in page with the connect parameters stripped. The code is parked in
+`src/lib/connect.ts`; restore the button in `SettingsForm.tsx` once the route
+ships.
 
 ## Optional: regenerate the artwork
 
