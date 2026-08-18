@@ -11,6 +11,18 @@ interface Props {
 
 type Mode = "remember" | "analyze" | "restore";
 
+/**
+ * Button text for each mode. The union values double as the SDK method names
+ * shown in the snippet (`memwal.remember(...)`), so they stay lowercase as
+ * identifiers — only the visible label is capitalized, matching every other
+ * button in the app.
+ */
+const MODE_LABELS: Record<Mode, string> = {
+    remember: "Remember",
+    analyze: "Analyze",
+    restore: "Restore",
+};
+
 export function ActionsPanel({ memwal, defaultNamespace, onChanged }: Props) {
     const [mode, setMode] = useState<Mode>("remember");
     const [text, setText] = useState("");
@@ -108,7 +120,7 @@ const res = await memwal.restore(${JSON.stringify(namespace)}, 100)
                         className={`chip ${mode === m ? "on" : ""}`}
                         onClick={() => setMode(m)}
                     >
-                        {m}
+                        {MODE_LABELS[m]}
                     </button>
                 ))}
             </div>
@@ -145,7 +157,7 @@ const res = await memwal.restore(${JSON.stringify(namespace)}, 100)
                         onClick={run}
                         disabled={busy || (mode !== "restore" && !text.trim())}
                     >
-                        {busy ? "Working…" : mode}
+                        {busy ? "Working…" : MODE_LABELS[mode]}
                     </button>
                 </div>
             </div>
